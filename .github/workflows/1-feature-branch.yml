@@ -1,0 +1,32 @@
+name: (1) Feature Branch Pipeline
+
+on:
+  pull_request:
+    branches:
+      - "develop"
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.14.2"
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build project
+        run: |
+          npm install 
+          npm run build
