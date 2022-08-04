@@ -5,6 +5,7 @@ export class GraphNode {
   from: GraphNode[];
   to: GraphNode[];
   value: number;
+  dfs: any;
 
   constructor(value) {
     this.uuid = uuidv4();
