@@ -1,0 +1,25 @@
+{
+  "name": "opensim",
+  "version": "0.0.0",
+  "description": "Constraint-based construction model",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luislongo/openSIM.git"
+  },
+  "author": "Luís Longo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luislongo/openSIM/issues"
+  },
+  "homepage": "https://github.com/luislongo/openSIM#readme",
+  "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7"
+  }
+}
