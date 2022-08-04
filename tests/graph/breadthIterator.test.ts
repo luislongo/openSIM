@@ -1,7 +1,7 @@
-import { DepthIterator } from "../../src/graph/depthIterator.class";
+import { BreadthIterator } from "../../src/graph/breadthIterator.class";
 import { GraphNode } from "../../src/graph/graphNode.class";
 
-describe("GraphNode behaviour", () => {
+describe("BreadthIterator behavior", () => {
   it("should return children in the right order", () => {
     const nodeA = new GraphNode(1);
     const nodeB = new GraphNode(2);
@@ -12,11 +12,11 @@ describe("GraphNode behaviour", () => {
     nodeA.addChild(nodeC);
     nodeB.addChild(nodeD);
 
-    const iterator = new DepthIterator(nodeA);
+    const iterator = new BreadthIterator(nodeA);
     expect(iterator.next()?.value).toBe(1);
     expect(iterator.next()?.value).toBe(2);
-    expect(iterator.next()?.value).toBe(4);
     expect(iterator.next()?.value).toBe(3);
+    expect(iterator.next()?.value).toBe(4);
     expect(iterator.next()?.value).toBe(undefined);
   });
 
@@ -34,13 +34,13 @@ describe("GraphNode behaviour", () => {
     nodeA_A.addChild(nodeA_A_B);
     nodeA_B.addChild(nodeA_B_A);
 
-    const iterator_A = new DepthIterator(nodeA_A);
+    const iterator_A = new BreadthIterator(nodeA_A);
     expect(iterator_A.next()?.value).toBe(2);
     expect(iterator_A.next()?.value).toBe(4);
     expect(iterator_A.next()?.value).toBe(5);
     expect(iterator_A.next()?.value).toBe(undefined);
 
-    const iterator_B = new DepthIterator(nodeA_B);
+    const iterator_B = new BreadthIterator(nodeA_B);
     expect(iterator_B.next()?.value).toBe(3);
     expect(iterator_B.next()?.value).toBe(6);
   });
