@@ -2,7 +2,7 @@
   "name": "opensim",
   "version": "0.0.0",
   "description": "Constraint-based construction model",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --watch"
