@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for depthIterator.class.ts</title>
+    <title>Code coverage report for dependencyNode.class.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> depthIterator.class.ts</h1>
+        <h1><a href="index.html">All files</a> dependencyNode.class.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,14 +32,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -91,70 +91,61 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GraphNode } from "./graphNode.class";
-import { GraphIterator } from "./graphIterator.interface";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { BreadthIterator } from "./breadthIterator.class";
+import { Dependency } from "./dependency.interface";
+import { GraphNode } from "./graphNode.class";
 &nbsp;
-export class DepthIterator&lt;T&gt; implements GraphIterator&lt;T&gt; {
-  current: GraphNode&lt;T&gt; | undefined;
-  stack: GraphNode&lt;T&gt;[];
-&nbsp;
-  constructor(root: GraphNode&lt;T&gt;) {
-    this.stack = DepthIterator.dfs(root, []);
-    this.current = this.stack.shift();
+export class DependencyNode&lt;T&gt; extends GraphNode&lt;Dependency&lt;T&gt;&gt; {
+  constructor(dependecy: Dependency&lt;T&gt;) {
+    super(dependecy);
   }
 &nbsp;
-  static dfs = &lt;T&gt;(
-    node: GraphNode&lt;T&gt;,
-    partial: GraphNode&lt;T&gt;[]
-  ): GraphNode&lt;T&gt;[] =&gt; {
-    partial.push(node);
-    node.to.forEach((child) =&gt; {
-      DepthIterator.dfs(child, partial);
-    });
+  set(value: T) {
+    this.value.current = value;
 &nbsp;
-    return partial;
-  };
+    const iterator = new BreadthIterator(this);
 &nbsp;
-  next = (): GraphNode&lt;T&gt; | undefined =&gt; {
-    const node = this.current;
-    this.current = this.stack.shift();
+    if (iterator.next()) {
+      while (true) {
+        const node = iterator.next();
+        if (!node) {
+          break;
+        }
 &nbsp;
-    return node;
-  };
+        // This line is where calculations happen
+        // Note that only one input is taken into account for now
+        node.value.current = node.value.pipe(node.from[0].value.current);
+      }
+    }
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
