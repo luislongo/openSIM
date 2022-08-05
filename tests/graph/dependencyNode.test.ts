@@ -11,7 +11,6 @@ describe("DependencyNode behaviour", () => {
     nodeA.addChild(nodeC);
     nodeB.addChild(nodeD);
 
-    nodeA.set(5);
     expect(nodeB.value.current).toBe(10);
     expect(nodeC.value.current).toBe(10);
     expect(nodeD.value.current).toBe(10);

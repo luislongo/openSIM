@@ -18,7 +18,7 @@ export class GraphNode<T> {
     child.from.push(this);
   }
 
-  removeChild(child) {
+  removeChild(child: GraphNode<T>) {
     this.to = this.to.filter((c) => c.value !== child.value);
     child.from = child.from.filter((c) => c.value !== this.value);
   }
