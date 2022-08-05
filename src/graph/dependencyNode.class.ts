@@ -2,12 +2,12 @@ import { BreadthIterator } from "./breadthIterator.class";
 import { Dependency } from "./dependency.interface";
 import { GraphNode } from "./graphNode.class";
 
-export class DependencyNode extends GraphNode<Dependency> {
-  constructor(value: number) {
-    super({ current: value, pipe: (input: number) => 2 * input });
+export class DependencyNode<T> extends GraphNode<Dependency<T>> {
+  constructor(dependecy: Dependency<T>) {
+    super(dependecy);
   }
 
-  set(value: number) {
+  set(value: T) {
     this.value.current = value;
 
     const iterator = new BreadthIterator(this);

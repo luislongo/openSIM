@@ -1,4 +1,4 @@
-export interface Dependency {
-  current: number;
-  pipe: (input: number) => number;
+export interface Dependency<T> {
+  current: T;
+  pipe: (input: T) => T;
 }
