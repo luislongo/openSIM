@@ -1,4 +1,4 @@
-import { GraphNode } from "../../src/graph/graphNode.class";
+import { GraphNode } from "src/graph/graphNode.class";
 
 describe("GraphNode behaviour", () => {
   it("Add child should work properly", () => {

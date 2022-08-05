@@ -1,5 +1,5 @@
-import { DepthIterator } from "../../src/graph/depthIterator.class";
-import { GraphNode } from "../../src/graph/graphNode.class";
+import { DepthIterator } from "src/graph/depthIterator.class";
+import { GraphNode } from "src/graph/graphNode.class";
 
 describe("GraphNode behaviour", () => {
   it("should return children in the right order", () => {

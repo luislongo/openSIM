@@ -1,5 +1,5 @@
-import { BreadthIterator } from "../../src/graph/breadthIterator.class";
-import { GraphNode } from "../../src/graph/graphNode.class";
+import { BreadthIterator } from "src/graph/breadthIterator.class";
+import { GraphNode } from "src/graph/graphNode.class";
 
 describe("BreadthIterator behavior", () => {
   it("should return children in the right order", () => {
