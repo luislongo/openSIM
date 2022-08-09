@@ -1,13 +1,25 @@
-import { Vec2Socket } from "../sockets/vec2Socket";
-import { DependencyNode } from "./dependencyNode.class";
+import { Socket } from "../sockets/socket";
+import { DependencyNode } from "./dependencyNode";
+import { NumberNode } from "./entryNode";
 
-export interface Vec2 {
+export type ToVec2SocketMap = {
+  x: NumberNode;
+  y: NumberNode;
+};
+
+export type Vec2 = {
   x: number;
   y: number;
-}
+};
 
-export class ToVec2Node extends DependencyNode<Vec2, Vec2, Vec2Socket> {
-  constructor(from: Vec2Socket) {
-    super(from, (v2) => v2);
+export class ToVec2Node extends DependencyNode<ToVec2SocketMap, Vec2, Vec2> {
+  constructor(xNode: NumberNode, yNode: NumberNode) {
+    super(
+      new Socket<ToVec2SocketMap, Vec2>(
+        { x: xNode, y: yNode },
+        (dependencies) => ({ x: xNode.value || 0, y: yNode.value || 0 })
+      ),
+      (v2) => v2
+    );
   }
 }

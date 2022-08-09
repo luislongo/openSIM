@@ -1,18 +1,38 @@
-import { RepeatStringSocket } from "../sockets/repeatStringSocket";
-import { Vec2Socket } from "../sockets/vec2Socket";
-import { DependencyNode } from "./dependencyNode.class";
+import { Socket } from "../sockets/socket";
+import { DependencyNode, OutputNode } from "./dependencyNode";
+import { NumberNode, StringNode } from "./entryNode";
 
-export interface Vec2 {
-  x: number;
-  y: number;
-}
+export type RepeatStringSocketType = {
+  text: OutputNode<string>;
+  count: OutputNode<number>;
+};
+
+export type RepeatStringSocketValue = {
+  text: string;
+  count: number;
+};
 
 export class RepeatStringNode extends DependencyNode<
-  string,
-  string,
-  RepeatStringSocket
+  RepeatStringSocketType,
+  RepeatStringSocketValue,
+  string
 > {
-  constructor(from: RepeatStringSocket) {
-    super(from, (v2) => v2);
+  constructor(textNode: OutputNode<string>, countNode: OutputNode<number>) {
+    super(
+      new Socket<RepeatStringSocketType, RepeatStringSocketValue>(
+        { text: textNode, count: countNode },
+        (dependencies) => ({
+          text: dependencies.text.value || "",
+          count: dependencies.count.value || 0,
+        })
+      ),
+      (value) => {
+        let result = "";
+        for (let i = 0; i < value.count; i++) {
+          result += value.text;
+        }
+        return result;
+      }
+    );
   }
 }

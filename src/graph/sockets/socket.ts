@@ -1,12 +1,14 @@
-import { UnknownDependencyNode } from "../nodes/dependencyNode.class";
-import { Pipe } from "../pipes/pipe";
+import { OutputNode } from "../nodes/dependencyNode";
 
-export class Socket<I, O> {
-  dependencies: UnknownDependencyNode[];
-  raw: () => I;
+export type GenericSocketMap = { [key: string]: OutputNode<any> };
+export type GenericSocket<T> = Socket<GenericSocketMap, T>;
 
-  constructor(value: I, dependencies?: UnknownDependencyNode[]) {
-    this.dependencies = dependencies || [];
-    this.raw = () => value;
+export class Socket<S extends GenericSocketMap, T> {
+  dependencies: S;
+  accessor: (dependencies: S) => T;
+
+  constructor(dependencies: S, accessor: (dependencies: S) => T) {
+    this.dependencies = dependencies;
+    this.accessor = accessor;
   }
 }
